@@ -961,11 +961,11 @@ function install_host_zfs_packages_Debian {
   if [[ ${ZFS_SKIP_LIVE_ZFS_MODULE_INSTALL:-} != "1" ]]; then
     echo "zfs-dkms zfs-dkms/note-incompatible-licenses note true" | debconf-set-selections
 
-    echo "deb http://deb.debian.org/debian buster contrib" >> /etc/apt/sources.list
-    echo "deb http://deb.debian.org/debian buster-backports main contrib" >> /etc/apt/sources.list
+    echo "deb http://deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
+    echo "deb http://deb.debian.org/debian bullseye-backports main contrib" >> /etc/apt/sources.list
     apt update
 
-    apt install --yes -t buster-backports zfs-dkms
+    apt install --yes -t bullseye-backports zfs-dkms
 
     modprobe zfs
   fi
@@ -1415,15 +1415,15 @@ function install_jail_zfs_packages {
 }
 
 function install_jail_zfs_packages_Debian {
-  chroot_execute 'echo "deb http://deb.debian.org/debian buster main contrib"     >> /etc/apt/sources.list'
-  chroot_execute 'echo "deb-src http://deb.debian.org/debian buster main contrib" >> /etc/apt/sources.list'
+  chroot_execute 'echo "deb http://deb.debian.org/debian bullseye main contrib"     >> /etc/apt/sources.list'
+  chroot_execute 'echo "deb-src http://deb.debian.org/debian bullseye main contrib" >> /etc/apt/sources.list'
 
-  chroot_execute 'echo "deb http://deb.debian.org/debian buster-backports main contrib"     >> /etc/apt/sources.list.d/buster-backports.list'
-  chroot_execute 'echo "deb-src http://deb.debian.org/debian buster-backports main contrib" >> /etc/apt/sources.list.d/buster-backports.list'
+  chroot_execute 'echo "deb http://deb.debian.org/debian bullseye-backports main contrib"     >> /etc/apt/sources.list.d/bullseye-backports.list'
+  chroot_execute 'echo "deb-src http://deb.debian.org/debian bullseye-backports main contrib" >> /etc/apt/sources.list.d/bullseye-backports.list'
 
   chroot_execute 'cat > /etc/apt/preferences.d/90_zfs <<APT
 Package: libnvpair1linux libuutil1linux libzfs2linux libzpool2linux zfs-dkms zfs-initramfs zfs-test zfsutils-linux zfsutils-linux-dev zfs-zed
-Pin: release n=buster-backports
+Pin: release n=bullseye-backports
 Pin-Priority: 990
 APT'
 
