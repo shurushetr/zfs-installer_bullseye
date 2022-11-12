@@ -653,7 +653,7 @@ function install_host_base_packages {
   # the other packages are each required by different distros, so for simplicity, they're all packed
   # together.
   #
-  apt install -y efibootmgr dialog software-properties-common gdisk
+  apt install -y efibootmgr dialog software-properties-common gdisk debootstrap util-linux
 }
 
 function select_disks {
